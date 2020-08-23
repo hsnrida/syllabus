@@ -12,7 +12,8 @@ Route::get('/', function () {
 Auth::routes();
 
 // 
- 
+Route::get('test','Validator\ValidationsController@getAllValidations');
+
 
 Route::get('/home', 'HomeController@index')->name('home');
 

@@ -4,18 +4,16 @@ namespace App\Http\Controllers\Builder;
 
 use App\Http\Controllers\Controller;
 use App\Syllabus;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use PhpParser\Node\Expr\Cast\Int_;
-use Ramsey\Uuid\Type\Integer;
+use Illuminate\Support\Facades\DB;
+
 
 class SyllabiController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -23,102 +21,85 @@ class SyllabiController extends Controller
     }
     public function index()
     {
-        $user=Auth::user();
-        $syllabi=$user->syllabi->where('stage','!=',-1);
-        return view('builder.syllabi.index')->with('syllabi',$syllabi);
+        $user = Auth::user();
+        $syllabi = $this->getLatestVersions();
+        return view('builder.syllabi.index')->with('syllabi', $syllabi);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function edit(Syllabus $syllabus)
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Syllabus  $syllabus
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Syllabus $syllabus)
-    {
-        return view('builder.syllabi.show')->with('syllabus',$syllabus);
     }
 
     public function retry(Syllabus $syllabus)
     {
-        $syllabus->stage=0;
+        $syllabus->stage = 0;
         $syllabus->save();
-        return $this->edit($syllabus);
+        return $this->show($syllabus);
     }
-  
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Syllabus  $syllabus
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Syllabus $syllabus)
+
+    public function show(Syllabus $syllabus)
     {
-        $user=Auth::user();
-        $syllabi=$user->syllabi->where('course_id',$syllabus->course_id);
-        $lastSyllabus=$syllabi->pop();
-        return view('builder.syllabi.edit')->with([
-            'syllabi'=>$syllabi,
-            'lastSyllabus'=>$lastSyllabus
-            ]);    }
+        $syllabi = $this->getAllSyllabusVersions($syllabus);
+        return view('builder.syllabi.show')->with([
+            'syllabi' => $syllabi,
+            'currentSyllabus' => $syllabus
+        ]);
+    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Syllabus  $syllabus
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, Syllabus $syllabus)
     {
-        $syllabus->syllabus=$request->syllabusText;
-        if($request->input('action')=='submit'){
-            $syllabus->stage=1;
+        $syllabus->syllabus = $request->syllabusText;
+        $message = " has been saved";
+        if ($request->input('action') == 'submit') {
+            $syllabus->stage = 1;
             $syllabus->save();
+            $message = " has been submitted";
         }
-    
-       if( $syllabus->save())
-       {
-              $request->session()->flash('success',$syllabus->title .'  has been updated');
-               
-       }
-       else {
-              $request->session()->flash('error','There was an error updating the syllabus');
-       }
+
+        if ($syllabus->save()) {
+            $request->session()->flash('success', $syllabus->title . $message);
+        } else {
+            $request->session()->flash('error', 'There was an error updating the syllabus');
+        }
 
         return redirect()->route('builder.syllabi.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Syllabus  $syllabus
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Syllabus $syllabus)
+
+    //get all the versions of a specific syllabus of a user in this year 
+    public function getAllSyllabusVersions(Syllabus $syllabus)
     {
-        //
+
+        $user = Auth::user();
+        $currentYear = Carbon::now()->year;
+        $syllabi = Syllabus::whereYear('created_at', $currentYear)
+            ->where('user_id', $user->id)
+            ->where('course_id', $syllabus->course_id)
+            ->get();
+        return $syllabi;
+    }
+
+    //get a group of syllabi with all its versions
+    public function getAllSyllabi()
+    {
+        $user = Auth::user();
+        $currentYear = Carbon::now()->year;
+        $syllabi = Syllabus::whereYear('created_at', $currentYear)
+            ->where('user_id', $user->id)
+            ->get()
+            ->groupBy('course_id');
+        return $syllabi;
+    }
+    //get a collection of latestversions of all syllabi
+    public function getLatestVersions()
+    {
+        $syllabi = $this->getAllSyllabi();
+        $lastVersions = Collect();
+        foreach ($syllabi as $s) {
+            $lastVersions->add($s->last());
+        }
+        return $lastVersions;
     }
 }

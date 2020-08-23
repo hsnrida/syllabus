@@ -26,48 +26,29 @@ class ValidationsController extends Controller
     }
     public function index()
     {
-        $user = Auth::user();
-        $firstValidations = $user->validations;
-        $validations = collect();
-        foreach ($firstValidations as $val) {
-            if ($val->status != -1) {
-                $validations->add($val);
-            }
-        }
+        $validations=$this->getLatestVersions();
         return view('validator.syllabi.index')->with('validations', $validations);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Validation  $validation
-     * @return \Illuminate\Http\Response
-     */
     public function show(int $validation)
     {
         $validation = Validation::find($validation);
-        return view('validator.syllabi.show')->with('validation', $validation);
+        $validations = $this->getAllValidationVersions($validation);
+        return view('validator.syllabi.show')->with([
+            'currentValidation' => $validation,
+            'validations' => $validations
+        ]);
     }
     public function confirm(int $validation)
     {
@@ -106,50 +87,58 @@ class ValidationsController extends Controller
         return $this->index();
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Validation  $validation
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit(int $validation)
     {
-        $user = Auth::user();
-        $validation = Validation::find($validation);
-        $allvalidations = $user->validations;
-        $validations = collect();
-        foreach ($allvalidations as $val) {
-            if ($val->syllabus->course_id == $validation->syllabus->course_id) {
-                $validations->add($val);
-            }
-        }
-        // $validations->pop();
-        return view('validator.syllabi.edit')->with([
-            'validation' => $validation,
-            'validations' => $validations
-        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Validation  $validation
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, Validation $validation)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Validation  $validation
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Validation $validation)
+
+    //get all the versions of a specific validation of a user in this year 
+    public function getAllValidationVersions(Validation $validation)
     {
-        //
+        $user = Auth::user();
+        $currentYear = Carbon::now()->year;
+        $allValidations = Validation::whereYear('created_at', $currentYear)
+            ->where('user_id', $user->id)
+            ->get();
+
+        $validations = collect();
+        foreach ($allValidations as $val) {
+            if ($val->syllabus->course_id == $validation->syllabus->course_id) {
+                $validations->add($val);
+            }
+        }
+        return $validations;
+    }
+
+    //get a group of validations with all its versions
+    public function getAllValidations()
+    {
+        $user = Auth::user();
+        $currentYear = Carbon::now()->year;
+        $allValidations = Validation::whereYear('created_at', $currentYear)
+            ->where('user_id', $user->id)
+            ->get();
+
+        $validations=$allValidations->groupBy(function ($item) {
+            return $item->syllabus->course_id;
+        });
+        return $validations;
+    }
+    //get a collection of latestversions of all validations
+    public function getLatestVersions()
+    {
+        $validations = $this->getAllValidations();
+        $lastVersions = Collect();
+        foreach ($validations as $v) {
+            $lastVersions->add($v->last());
+        }
+        return $lastVersions;
     }
 }
