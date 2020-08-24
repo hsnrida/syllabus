@@ -52,8 +52,12 @@
                 <div class="card-header">{{$currentSyllabus->title}}</div>
                 <div class="card-body">
                     @if($currentSyllabus->stage==2)
+                    <div class="alert alert-secondary" role="alert">
+                        This syllabus is confirmed by validator
+                    </div>
+                    @elseif($currentSyllabus->stage==5)
                     <div class="alert alert-success" role="alert">
-                        This syllabus is confirmed
+                    This syllabus is confirmed by supervisor!
                     </div>
                     @elseif($currentSyllabus->stage==1)
                     <div class="alert alert-info" role="alert">
@@ -76,9 +80,28 @@
                 </div>
                 <div class="col-md-4 ">
                     <div class="card">
-                        <div class="card-header">Comments</div>
+                        <div class="card-header"> Validator Comments</div>
                         <div class="card-body">
                             {{$currentSyllabus->validation->comments}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @elseif($currentSyllabus->stage==-3)
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header">Syllabus</div>
+                        <div class="card-body">
+                            {!! $currentSyllabus->syllabus!!}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 ">
+                    <div class="card">
+                        <div class="card-header">Supervisor Comments</div>
+                        <div class="card-body">
+                            {{$currentSyllabus->confirmation->comments}}
                         </div>
                     </div>
                 </div>
@@ -101,9 +124,37 @@
                 </div>
                 <div class="col-md-4 ">
                     <div class="card">
-                        <div class="card-header">Comments</div>
+                        <div class="card-header">Validator Comments</div>
                         <div class="card-body">
                             {{$rejectedSyllabus->validation->comments}}
+                        </div>
+                        <div class="card-footer text-muted">
+                            <a type="button" class="btn btn-success" href="{{ route('builder.syllabi.retry', $currentSyllabus->id)}}">Retry</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @elseif($currentSyllabus->stage==-4)
+            <div class="row justify-content-center">
+                <?php
+
+                $allSyllabus = $syllabi;
+                $allSyllabus->pop();
+                $rejectedSyllabus = $allSyllabus->last();
+                ?>
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header">Syllabus</div>
+                        <div class="card-body">
+                            {!! $rejectedSyllabus->syllabus!!}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 ">
+                    <div class="card">
+                        <div class="card-header">Supervisor Comments</div>
+                        <div class="card-body">
+                            {{$rejectedSyllabus->confirmation->comments}}
                         </div>
                         <div class="card-footer text-muted">
                             <a type="button" class="btn btn-success" href="{{ route('builder.syllabi.retry', $currentSyllabus->id)}}">Retry</a>

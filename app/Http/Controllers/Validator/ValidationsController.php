@@ -9,8 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Syllabus;
-
-
+use App\User;
 
 class ValidationsController extends Controller
 {
@@ -59,6 +58,20 @@ class ValidationsController extends Controller
         $validation->save();
         $validation->syllabus->stage = 2;
         $validation->syllabus->save();
+        
+        //creating a confirmation record for the supervisor
+        $department=Auth::user()->department;
+        $supervisor=$department->users()->whereHas(
+            'roles', function($q){
+                $q->where('name', 'supervisor');
+            }
+        )->first();
+        $confirmation =new Confirmation;
+        $confirmation->user_id=$supervisor->id;
+        $confirmation->syllabus_id=$validation->syllabus->id;
+        $confirmation->status=0;
+        $confirmation->save();
+
         return $this->index();
     }
     public function refuse(Request $request, int $validation)
@@ -93,10 +106,7 @@ class ValidationsController extends Controller
     }
 
 
-    public function update(Request $request, Validation $validation)
-    {
-        //
-    }
+  
 
 
     //get all the versions of a specific validation of a user in this year 
@@ -125,6 +135,7 @@ class ValidationsController extends Controller
         $allValidations = Validation::whereYear('created_at', $currentYear)
             ->where('user_id', $user->id)
             ->get();
+            
 
         $validations=$allValidations->groupBy(function ($item) {
             return $item->syllabus->course_id;

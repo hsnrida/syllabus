@@ -24,17 +24,19 @@
                 @elseif($syllabus->stage==1)
                 <a href="{{ route('builder.syllabi.show', $syllabus->id)}}" class="list-group-item list-group-item-action  list-group-item-warning flex-column align-items-start ">
                     @elseif($syllabus->stage==2)
-                    <a href="{{ route('builder.syllabi.show', $syllabus->id)}}" class="list-group-item list-group-item-action  list-group-item-success flex-column align-items-start ">
-                        @elseif($syllabus->stage==-2)
+                    <a href="{{ route('builder.syllabi.show', $syllabus->id)}}" class="list-group-item list-group-item-action  list-group-item-secondary flex-column align-items-start ">
+                        @elseif($syllabus->stage==-2 || $syllabus->stage==-4)
                         <a href="{{ route('builder.syllabi.show', $syllabus->id)}}" class="list-group-item list-group-item-action  list-group-item-danger flex-column align-items-start ">
-                            @endif
-                            <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1">{{$syllabus->title}}</h5>
-                                <small>{{$syllabus->created_at}}</small>
-                            </div>
-                            <p class="mb-1">{{$syllabus->course->description}}</p>
-                            <small>credits:{{$syllabus->course->credits}}</small>
-                        </a>
+                            @elseif($syllabus->stage==5)
+                            <a href="{{ route('builder.syllabi.show', $syllabus->id)}}" class="list-group-item list-group-item-action  list-group-item-success flex-column align-items-start ">
+                                @endif
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">{{$syllabus->title}}</h5>
+                                    <small>{{$syllabus->created_at}}</small>
+                                </div>
+                                <p class="mb-1">{{$syllabus->course->description}}</p>
+                                <small>credits:{{$syllabus->course->credits}}</small>
+                            </a>
 
         </div>
         <br>

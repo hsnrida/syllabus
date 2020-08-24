@@ -7,9 +7,9 @@
         <ul class="pagination pagination-lg justify-content-center">
             <?php $counter = 0;
             $status = "" ?>
-            @foreach($validations as $val)
-            @if($val==$currentValidation) @php $status="active" @endphp @endif
-            <li class="page-item {{$status}}"><a class="page-link" href="{{ route('validator.syllabi.show', $val->id)}}">{{++$counter}}</a></li>
+            @foreach($confirmations as $con)
+            @if($con==$currentConfirmation) @php $status="active" @endphp @endif
+            <li class="page-item {{$status}}"><a class="page-link" href="{{ route('supervisor.confirmations.show', $con->id)}}">{{++$counter}}</a></li>
             @php $status="" @endphp
             @endforeach
         </ul>
@@ -19,18 +19,18 @@
     <div class="row justify-content-center">
 
         <div class="col-md-8">
-            @if($currentValidation->status==0 && ($currentValidation->syllabus->stage==0 || $currentValidation->syllabus->stage==-2 ||  $currentValidation->syllabus->stage==-4))
-            <div class="alert alert-info" role="alert">
+            @if($currentConfirmation->status==0 && $currentConfirmation->syllabus->stage==0)
+            <div class="alert alert-danger" role="alert">
                 Syllabus under construction !
             </div>
-            @elseif($currentValidation->status==0 && $currentValidation->syllabus->stage==1)
+            @elseif($currentConfirmation->status==0 && $currentConfirmation->syllabus->stage==2)
             <div class="card">
                 <div class="card-header">Syllabus</div>
                 <div class="card-body">
-                    {!! $currentValidation->syllabus->syllabus !!}
+                    {!! $currentConfirmation->syllabus->syllabus !!}
                 </div>
                 <div class="btn-group" role="group" aria-label="Basic example">
-                    <a type="button" class="btn btn-success" href="{{ route('validator.syllabi.confirm', $currentValidation->id)}}">Confirm</a>
+                    <a type="button" class="btn btn-success" href="{{ route('supervisor.confirmations.confirm', $currentConfirmation->id)}}">Confirm</a>
                     <button id="refuse" type="button" class="btn btn-danger">Refuse</button>
                 </div><br>
             </div>
@@ -38,18 +38,18 @@
             <div class="card">
                 <div class="card-header">Syllabus</div>
                 <div class="card-body">
-                    {!! $currentValidation->syllabus->syllabus!!}
+                    {!! $currentConfirmation->syllabus->syllabus!!}
                 </div>
             </div>
             @endif
         </div>
         <div class="col-md-4">
-            @if($currentValidation->status==0 && $currentValidation->syllabus->stage==1)
+            @if($currentConfirmation->status==0 && $currentConfirmation->syllabus->stage==2)
             <div id="CommentCard">
                 <div class="card">
                     <div class="card-header">Comments</div>
                     <div class="card-body">
-                        <form action="{{ route('validator.syllabi.refuse', $currentValidation->id)}}" method="Post" class="float-left">
+                        <form action="{{ route('supervisor.confirmations.refuse', $currentConfirmation->id)}}" method="Post" class="float-left">
                             @csrf
                             <textarea name="comments" id="comments" cols="40" rows="10"></textarea>
                     </div>
@@ -59,29 +59,17 @@
                     </form>
                 </div>
             </div>
-            @elseif($currentValidation->status==1)
-            <div class="alert alert-secondary" role="alert">
-                Syllabus confirmed 
+            @elseif($currentConfirmation->status==1)
+            <div class="alert alert-success" role="alert">
+                Syllabus confirmed
             </div>
-            @elseif($currentValidation->status==-1)
+            @elseif($currentConfirmation->status==-1)
             <div class="card">
 
                 <div class="card-header">Comments</div>
                 <div class="card-body">
-                    {{$currentValidation->comments}}
+                    {{$currentConfirmation->comments}}
                 </div>
-            </div>
-            @elseif($currentValidation->status==-2)
-            <div class="card">
-
-                <div class="card-header">Supervisor Comments</div>
-                <div class="card-body">
-                    {{$currentValidation->syllabus->confirmation->comments}}
-                </div>
-            </div>
-            @elseif($currentValidation->status==2)
-            <div class="alert alert-success" role="alert">
-                Syllabus confirmed by supervisor!
             </div>
             @endif
         </div>
@@ -97,4 +85,5 @@
 
     });
 </script>
+
 @endsection

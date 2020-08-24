@@ -12,7 +12,7 @@ Route::get('/', function () {
 Auth::routes();
 
 // 
-Route::get('test','Validator\ValidationsController@getAllValidations');
+Route::get('test','Supervisor\ConfirmationsController@getLatestVersions');
 
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -23,7 +23,10 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function(){
 
   Route::namespace('Supervisor')->prefix('supervisor')->name('supervisor.')->group(function(){
     Route::resource('/courses', 'DistributeCoursesController');
+    Route::resource('/confirmations', 'ConfirmationsController');
     Route::post('courses/distribute','DistributeCoursesController@distribute')->name('courses.distribute');
+    Route::get('/confirmations/{confirmation}/confirm','ConfirmationsController@confirm')->name('confirmations.confirm');
+    Route::post('/confirmations/{confirmation}/refuse','ConfirmationsController@refuse')->name('confirmations.refuse');
   });
 
   Route::namespace('Builder')->prefix('builder')->name('builder.')->group(function(){

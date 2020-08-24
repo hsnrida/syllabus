@@ -13,4 +13,8 @@ class Course extends Model
      {
          return $this->hasMany('App\Syllabus');
      }
+     public function latestSyllabus()
+     {
+         return $this->hasOne('App\Syllabus')->latest();
+     }
 }

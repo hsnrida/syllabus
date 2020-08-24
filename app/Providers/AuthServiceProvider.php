@@ -40,6 +40,9 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('validate-syllabus', function ($user) {
             return $user->hasOperationByRole('validate-syllabus');
         });
+        Gate::define('confirm-syllabus', function ($user) {
+            return $user->hasOperationByRole('confirm-syllabus');
+        });
         // Gate::define('view-syllabus', 'App\Policies\SyllabusPolicy@view');
         // Gate::define('create-syllabus', 'App\Policies\SyllabusPolicy@view');
         // Gate::define('edit-syllabus', 'App\Policies\SyllabusPolicy@view');
