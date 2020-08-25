@@ -32,6 +32,8 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function(){
   Route::namespace('Builder')->prefix('builder')->name('builder.')->group(function(){
     Route::resource('/syllabi', 'SyllabiController');
     Route::get('/syllabi/{syllabus}/retry','SyllabiController@retry')->name('syllabi.retry');
+    Route::post('/syllabi/{syllabus}/storeTemplate','SyllabiController@storeTemplate')->name('syllabi.storeTemplate');
+
   });
 
   Route::namespace('Validator')->prefix('validator')->name('validator.')->group(function(){

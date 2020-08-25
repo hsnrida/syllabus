@@ -64,7 +64,7 @@ class DistributeCoursesController extends Controller
             }
             if ($builders[$i] == $validators[$i]) {
                 session()->flash('msg', 'the builder and validator of a course must be different!');
-                return redirect()->back();
+                return redirect()->back()->withInput();
             }
         }
         $coursesId = $request->course;

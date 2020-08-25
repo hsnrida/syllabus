@@ -40,13 +40,20 @@ class SyllabiController extends Controller
 
     public function show(Syllabus $syllabus)
     {
+        $templates=DB::table('templates')->get();
         $syllabi = $this->getAllSyllabusVersions($syllabus);
         return view('builder.syllabi.show')->with([
             'syllabi' => $syllabi,
-            'currentSyllabus' => $syllabus
+            'currentSyllabus' => $syllabus,
+            'templates'=>$templates
         ]);
     }
-
+    public function storeTemplate(Request $request, Syllabus $syllabus)
+    {
+        $syllabus->syllabus=$request->template;
+        $syllabus->save();
+        return back();
+    }
 
     public function update(Request $request, Syllabus $syllabus)
     {
