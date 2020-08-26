@@ -12,7 +12,9 @@ Route::get('/', function () {
 Auth::routes();
 
 // 
-Route::get('test','Supervisor\ConfirmationsController@getLatestVersions');
+Route::get('/test', function () {
+  return view('test');
+});
 
 
 Route::get('/home', 'HomeController@index')->name('home');
