@@ -65,7 +65,7 @@
                 Syllabus confirmed
             </div>
             @elseif($currentValidation->status==-1)
-            <div class="card" style="position: fixed;" >
+            <div class="card" style="position: fixed;overflow:scroll; height:70%">
 
                 <div class="card-header text-white" style="background-color: #eb7175;">
                     <h3>Comments</h3>
@@ -96,13 +96,5 @@
 </div>
 
 </div>
-<script>
-    $("#").hide();
-    $(document).ready(function() {
-        $("#").click(function() {
-            $("#").toggle();
-        });
 
-    });
-</script>
 @endsection
