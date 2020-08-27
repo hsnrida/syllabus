@@ -18,6 +18,7 @@
             autosave_restore_when_empty: false,
             autosave_retention: '2m',
             image_advtab: true,
+         
             link_list: [{
                     title: 'My page 1',
                     value: 'http://www.tinymce.com'
@@ -134,9 +135,9 @@
                                 <div class="form-group">
                                     <textarea id="syllabusText" name="syllabusText">
                                     {{$currentSyllabus->syllabus}}
-                                   </textarea>
+                                    </textarea>
                                 </div>
-                               
+
                                 <button type="submit" value="save" name="action" class="btn btn-outline-success" style="margin:0 auto; display:block;">Save</button><br>
 
                         </div>
