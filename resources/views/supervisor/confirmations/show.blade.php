@@ -25,18 +25,21 @@
             </div>
             @elseif($currentConfirmation->status==0 && $currentConfirmation->syllabus->stage==2)
             <div class="card">
-                <div class="card-header">Syllabus</div>
+                <div class="card-header text-white" style="background-color: #00AA9E; text-align: center">
+                    <h3>{{$currentConfirmation->syllabus->title}} syllabus</h3>
+                </div>
                 <div class="card-body">
                     {!! $currentConfirmation->syllabus->syllabus !!}
                 </div>
                 <div class="btn-group" role="group" aria-label="Basic example">
                     <a type="button" class="btn btn-success" href="{{ route('supervisor.confirmations.confirm', $currentConfirmation->id)}}">Confirm</a>
-                    <button id="refuse" type="button" class="btn btn-danger">Refuse</button>
                 </div><br>
             </div>
             @else
             <div class="card">
-                <div class="card-header">Syllabus</div>
+                <div class="card-header text-white" style="background-color: #eb7175; text-align: center">
+                    <h3>{{ $currentConfirmation->syllabus->title }} syllabus </h3>
+                </div>
                 <div class="card-body">
                     {!! $currentConfirmation->syllabus->syllabus!!}
                 </div>
@@ -46,8 +49,10 @@
         <div class="col-md-4">
             @if($currentConfirmation->status==0 && $currentConfirmation->syllabus->stage==2)
             <div id="CommentCard">
-                <div class="card">
-                    <div class="card-header">Comments</div>
+                <div class="card" style="position: fixed; text-align: center ">
+                    <div class="card-header text-white" style="background-color: #00AA9E;">
+                        <h3>Comments</h3>
+                    </div>
                     <div class="card-body">
                         <form action="{{ route('supervisor.confirmations.refuse', $currentConfirmation->id)}}" method="Post" class="float-left">
                             @csrf
@@ -60,13 +65,16 @@
                 </div>
             </div>
             @elseif($currentConfirmation->status==1)
-            <div class="alert alert-success" role="alert">
-                Syllabus confirmed
+            <div class="alert alert-secondary" role="alert" style="position: fixed;">
+                <h1><span class="badge badge-success">Syllabus confirmed</span></h1>
+
             </div>
             @elseif($currentConfirmation->status==-1)
-            <div class="card">
+            <div class="card" style="position: fixed;">
 
-                <div class="card-header">Comments</div>
+                <div class="card-header text-white" style="background-color: #eb7175; text-align: center">
+                    <h3>Comments</h3>
+                </div>
                 <div class="card-body">
                     {{$currentConfirmation->comments}}
                 </div>
@@ -76,14 +84,6 @@
     </div>
 
 </div>
-<script>
-    $("#CommentCard").hide();
-    $(document).ready(function() {
-        $("#refuse").click(function() {
-            $("#CommentCard").toggle();
-        });
 
-    });
-</script>
 
 @endsection
