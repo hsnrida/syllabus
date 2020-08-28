@@ -64,8 +64,6 @@ class ConfirmationsController extends Controller
     public function confirm(Confirmation $confirmation)
     {
         $confirmation->status = 1;
-        $confirmation->date = Carbon::now();
-        $confirmation->time = Carbon::now();
         $confirmation->save();
         $confirmation->syllabus->stage = 5;
         $confirmation->syllabus->save();
@@ -80,8 +78,7 @@ class ConfirmationsController extends Controller
         
         $confirmation->status = -1;
         $confirmation->comments = $request->comments;
-        $confirmation->date = Carbon::now();
-        $confirmation->time = Carbon::now();
+
         $confirmation->save();
         $confirmation->syllabus->stage = -3;
         $confirmation->syllabus->save();

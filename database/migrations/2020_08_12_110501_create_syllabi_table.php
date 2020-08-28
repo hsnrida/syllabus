@@ -19,8 +19,6 @@ class CreateSyllabiTable extends Migration
             $table->string('code')->nullable();
             $table->longText('syllabus')->nullable();
             $table->integer('stage')->default(0);
-            $table->date('date')->nullable();
-            $table->time('time')->nullable();
             $table->integer('course_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->timestamps();

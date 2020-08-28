@@ -27,16 +27,6 @@ class DistributeCoursesController extends Controller
         $department = $user->department;
         $courses = $department->courses;
 
-        $syllabi = $department->syllabi;
-        if (count($syllabi)) {
-            $date = $syllabi[0]->created_at;
-            $date = new Carbon($date);
-            $mytime = Carbon::now();
-            if ($mytime->year == $date->year) {
-                dd("courses have been distributed");
-            }
-        }
-
         $builders = $department->users()->whereHas("roles", function ($q) {
             $q->where("name", "builder");
         })->get();
@@ -44,7 +34,19 @@ class DistributeCoursesController extends Controller
             $q->where("name", "validator");
         })->get();
 
-
+        $lastSyllabus = $department->syllabi->last();
+        if ($lastSyllabus) {
+            $date = $lastSyllabus->created_at;
+            $date = new Carbon($date);
+            $mytime = Carbon::now();
+            if ($mytime->year == $date->year) {
+                return view('supervisor.courses.show')->with([
+                    'courses' => $courses,
+                    'builders' => $builders,
+                    'validators' => $validators
+                ]);
+            }
+        }
         return view('supervisor.courses.index')->with([
             'courses' => $courses,
             'builders' => $builders,
@@ -75,6 +77,7 @@ class DistributeCoursesController extends Controller
             $syllabus->course_id = $courseId;
             $syllabus->user_id = $builders[$counter];
             $syllabus->department_id = $course->department_id;
+            $syllabus->code=$course->code;
             $syllabus->save();
 
             $validation = new Validation;
@@ -84,5 +87,6 @@ class DistributeCoursesController extends Controller
 
             $counter++;
         }
+        return $this->index();
     }
 }

@@ -16,8 +16,6 @@ class CreateConfirmationsTable extends Migration
         Schema::create('confirmations', function (Blueprint $table) {
             $table->increments('id');
             $table->boolean('status')->nullable();
-            $table->date('date')->nullable();
-            $table->time('time')->nullable();
             $table->text('comments')->nullable();
             $table->integer('user_id')->unsigned();
             $table->integer('syllabus_id')->unsigned();

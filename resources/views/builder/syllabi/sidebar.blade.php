@@ -7,9 +7,11 @@
 
 <body>
     <div class="container">
+        @if(count($templates))
         <div class="alert alert-info" role="alert">
             Templates
         </div>
+        @endif
 
         @foreach($templates as $template)
 

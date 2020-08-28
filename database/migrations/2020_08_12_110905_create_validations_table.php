@@ -16,8 +16,6 @@ class CreateValidationsTable extends Migration
         Schema::create('validations', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('status')->default(0);
-            $table->date('date')->nullable();
-            $table->time('time')->nullable();
             $table->text('comments')->nullable();
             $table->integer('user_id')->unsigned();
             $table->integer('syllabus_id')->unsigned();

@@ -53,8 +53,6 @@ class ValidationsController extends Controller
     {
         $validation = Validation::find($validation);
         $validation->status = 1;
-        $validation->date = Carbon::now();
-        $validation->time = Carbon::now();
         $validation->save();
         $validation->syllabus->stage = 2;
         $validation->syllabus->save();
@@ -80,8 +78,6 @@ class ValidationsController extends Controller
         $newValidation = $validation->replicate();
         $validation->status = -1;
         $validation->comments = $request->comments;
-        $validation->date = Carbon::now();
-        $validation->time = Carbon::now();
         $validation->save();
         $validation->syllabus->stage = -1;
         $validation->syllabus->save();

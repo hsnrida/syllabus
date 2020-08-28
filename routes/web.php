@@ -25,8 +25,9 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function(){
 
   Route::namespace('Supervisor')->prefix('supervisor')->name('supervisor.')->group(function(){
     Route::resource('/courses', 'DistributeCoursesController');
-    Route::resource('/confirmations', 'ConfirmationsController');
     Route::post('courses/distribute','DistributeCoursesController@distribute')->name('courses.distribute');
+
+    Route::resource('/confirmations', 'ConfirmationsController');
     Route::get('/confirmations/{confirmation}/confirm','ConfirmationsController@confirm')->name('confirmations.confirm');
     Route::post('/confirmations/{confirmation}/refuse','ConfirmationsController@refuse')->name('confirmations.refuse');
   });

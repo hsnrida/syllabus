@@ -24,8 +24,7 @@ class DatabaseSeeder extends Seeder
         $this->call(SyllabusSeeder::class);
         $this->call(UniversitySeeder::class);
         $this->call(DepartmentSeeder::class);
-       
-        
+        $this->call(TemplateSeeder::class);
 
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
         

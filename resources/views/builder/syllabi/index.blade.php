@@ -34,6 +34,7 @@
                                     <h5 class="mb-1">{{$syllabus->title}}</h5>
                                     <small>{{$syllabus->created_at}}</small>
                                 </div>
+                                <h5>{{$syllabus->code}}</h5>
                                 <p class="mb-1">{{$syllabus->course->description}}</p>
                                 <small>credits:{{$syllabus->course->credits}}</small>
                             </a>
