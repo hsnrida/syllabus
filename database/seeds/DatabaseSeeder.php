@@ -1,5 +1,6 @@
 <?php
 
+use App\Confirmation;
 use App\Department;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -25,6 +26,9 @@ class DatabaseSeeder extends Seeder
         $this->call(UniversitySeeder::class);
         $this->call(DepartmentSeeder::class);
         $this->call(TemplateSeeder::class);
+        $this->call(ConfirmationSeeder::class);
+        $this->call(ValidationSeeder::class);
+
 
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
         

@@ -12,11 +12,11 @@ class SyllabusSeeder extends Seeder
      */
     public function run()
     {
-        // Syllabus::create([
-        //     'title' => 'laravel',
-        //     'course_id' => '1',
-        //     'user_id' => '1',
-        //     'department_id'=>'1',
-        // ]);
+        Syllabus::create([
+            'title' => 'laravel',
+            'course_id' => '1',
+            'user_id' => '1',
+            'department_id'=>'1',
+        ]);
     }
 }

@@ -85,9 +85,15 @@
                 </div>
             </div>
             @elseif($currentValidation->status==2)
+            @if($currentValidation->syllabus->stage==10)
+            <div class="alert alert-success" style="position: fixed;" role="alert">
+                Syllabus is online!
+            </div>
+            @else
             <div class="alert alert-success" style="position: fixed;" role="alert">
                 Syllabus confirmed by supervisor!
             </div>
+            @endif
             @endif
         </div>
         @endif

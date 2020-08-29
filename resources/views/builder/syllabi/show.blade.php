@@ -162,6 +162,10 @@
                             <div class="alert alert-success" role="alert">
                                 This syllabus is confirmed by supervisor!
                             </div>
+                            @elseif($currentSyllabus->stage==10)
+                            <div class="alert alert-success" role="alert">
+                                This syllabus is online
+                            </div>
                             @elseif($currentSyllabus->stage==1)
                             <div class="alert alert-info" role="alert">
                                 Syllabus waiting validation

@@ -65,10 +65,15 @@
                 </div>
             </div>
             @elseif($currentConfirmation->status==1)
+            @if($currentConfirmation->syllabus->stage==10)
+            <div class="alert alert-secondary" role="alert" style="position: fixed;">
+                <h1><span class="badge badge-success">Syllabus online</span></h1>
+            </div>
+            @else
             <div class="alert alert-secondary" role="alert" style="position: fixed;">
                 <h1><span class="badge badge-success">Syllabus confirmed</span></h1>
-
             </div>
+            @endif
             @elseif($currentConfirmation->status==-1)
             <div class="card" style="position: fixed;">
 

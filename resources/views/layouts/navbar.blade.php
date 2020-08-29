@@ -5,7 +5,7 @@
 <nav class="navbar navbar-expand-md topnav" id="topnav">
     <div class="container">
         <a class="navbar-brand active" href="{{ url('/') }}">
-            Home
+        Home  <span class="caret"></span>
         </a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -18,6 +18,11 @@
                 @can('user-management')
                 <a class="navbar-brand" href="{{ url('/admin/users') }}">
                     User Management
+                </a>
+                @endcan
+                @can('shareOnline-syllabus')
+                <a class="navbar-brand" href="{{ url('/admin/syllabi') }}">
+                    Share Syllabi
                 </a>
                 @endcan
 
@@ -57,7 +62,7 @@
                 @endif
                 @else
                     <a id="nav-link" class=" disabled nav-link" href="#" >
-                        {{ Auth::user()->name }} <span class="caret"></span>
+                        <small>{{ Auth::user()->name}}</small>
                     </a>
                     <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

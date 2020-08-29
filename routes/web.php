@@ -11,9 +11,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
-// 
+//
+
 Route::get('/test', function () {
-  return view('test');
+   return view('test');
 });
 
 
@@ -21,6 +22,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function(){
     Route::resource('/users', 'UsersController');
+    Route::resource('/syllabi', 'ShareSyllabusController');
   });
 
   Route::namespace('Supervisor')->prefix('supervisor')->name('supervisor.')->group(function(){
