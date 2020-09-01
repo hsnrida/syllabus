@@ -19,7 +19,25 @@ class UniversitySeeder extends Seeder
           ]);
           University::create([
             'name'=>'AUB',
-            'address'=>'3ed el Mrayse ',
+            'address'=>'3en el Mrayse ',
           ]);
+          University::create([
+            'name'=>'LIU',
+            'address'=>'Saleem Slem ',
+          ]);
+          University::create([
+            'name'=>'MU',
+            'address'=>'Airport Bridge',
+          ]);  
+          University::create([
+            'name'=>'LAU',
+            'address'=>'Beirut',
+          ]);  
+          University::create([
+            'name'=>'IUL',
+            'address'=>'khaldeh',
+          ]);  
+            
+
     }
 }

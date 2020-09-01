@@ -48,13 +48,20 @@ class UserSeeder extends Seeder
             'password'=>Hash::make('123456789'),
           'department_id'=>'1'
           ]);
-        
+        $builder_test=User::create([
+          'name'=>'Builder2 User',
+          'email'=>'builder2@builder2.com',
+          'password'=>Hash::make('123456789'),
+          'department_id'=>'4'
+
+        ]);
+
         $admin->roles()->attach($adminRole);
         $builder->roles()->attach($builderRole);
         $validator->roles()->attach($validatorRole);
         $supervisor->roles()->attach($supervisorRole);
-
-          
+        $builder_test->roles()->attach($builderRole);  
+         
 
 
     

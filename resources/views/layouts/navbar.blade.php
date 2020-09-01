@@ -5,7 +5,7 @@
 <nav class="navbar navbar-expand-md topnav" id="topnav">
     <div class="container">
         <a class="navbar-brand active" href="{{ url('/') }}">
-        Home  <span class="caret"></span>
+            Home <span class="caret"></span>
         </a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -61,22 +61,25 @@
                 </li>
                 @endif
                 @else
-                    <a id="nav-link" class=" disabled nav-link" href="#" >
-                        <small>{{ Auth::user()->name}}</small>
-                    </a>
-                    <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
+                <a id="nav-link" class=" disabled nav-link" href="#">
+                    <small>{{ Auth::user()->name}}</small>
+                </a>
+                <a class="navbar-brand" href="{{ url('/home') }}">
+                {{ Auth::user()->department->name}}
+                </a>
+               
+                <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                            {{ __('Logout') }}
-                        </a>
+                    {{ __('Logout') }}
+                </a>
 
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            @csrf
-                        </form>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
 
-                    
+
                 @endguest
             </ul>
         </div>
     </div>
 </nav>
- 

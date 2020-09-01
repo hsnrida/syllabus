@@ -9,7 +9,9 @@
             </div><br><br>
             <div class="card">
 
-                <div class="card-header text-white " style="background-color:slategrey ; text-align:center"><h4>Confirmed Syllabi</h4></div>
+                <div class="card-header text-white " style="background-color:slategrey ; text-align:center">
+                    <h4>Confirmed Syllabi</h4>
+                </div>
 
                 <div class="card-body">
 
@@ -32,16 +34,17 @@
                                 <td> {{$syllabus->user->name}}</td>
                                 <td> {{$syllabus->validation->user->name}}</td>
                                 <td>
-
-                                    <button type="button" class="btn btn-primary  mr-2" data-toggle="modal" data-target="#id{{$syllabus->id}}">View</button>
-                                    @if($syllabus->stage==5)
-                                    <form action="{{route ('admin.syllabi.edit',$syllabus->id)}}" method="get" class=" ">
-                                        @csrf
-                                        <button type="submit" class="btn btn-success">Share</button>
-                                    </form>
-                                    @else
-                                    <button type="submit" class="disabled btn btn-danger">Shared !</button>
-                                    @endif
+                                    <div class="row justify-content-center">
+                                        <button type="button" class="btn btn-primary  mr-2" data-toggle="modal" data-target="#id{{$syllabus->id}}">View</button>
+                                        @if($syllabus->stage==5)
+                                        <form action="{{route ('admin.syllabi.edit',$syllabus->id)}}" method="get" class=" ">
+                                            @csrf
+                                            <button type="submit" class="btn btn-danger">offline</button>
+                                        </form>
+                                        @else
+                                        <button type="submit" class="disabled btn btn-success">online !</button>
+                                        @endif
+                                    </div>
                                     <div class="modal fade bd-example-modal-lg" id="id{{$syllabus->id}}" tabindex="-1" role="dialog" aria-labelledby="{{$syllabus->id}}label" aria-hidden="true">
                                         <div class="modal-dialog modal-lg">
                                             <div class="modal-content">

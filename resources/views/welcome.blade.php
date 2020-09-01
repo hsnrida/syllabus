@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
     <!-- Styles -->
+    <link href="{{ asset('css/button.css') }}" rel="stylesheet">
     <style>
         html,
         body {
@@ -70,13 +71,11 @@
             font-size: 15px;
             line-height: 24px;
             color: #737373;
-        } 
+        }
 
         .copyright-text {
             margin: 0
         }
-
-   
     </style>
 </head>
 
@@ -96,28 +95,33 @@
         </div>
         @endif
 
+
         <div class="content">
-            <div class="title m-b-md">
-                <img src="img/img2.jpg" alt="Welcome">
+                <form action="{{route('universities')}}" method="get">
+                    <button type="submit" class="learn-more ">
+                        <span class="circle" aria-hidden="true">
+                            <span class="icon arrow"></span>
+                        </span>
+                        <span class="button-text">view Syllabi</span>
+                    </button>
+                </form>
+
+            <div class="title ">
+                <img src="img/img3.jpg" alt="Welcome">
             </div>
 
-            <div class="links">
-                <a href="https://laravel.com/docs">Docs</a>
-                <a href="https://laracasts.com">Laracasts</a>
-                <a href="https://laravel-news.com">News</a>
-
-            </div>
         </div>
 
     </div>
+
     <!-- Site footer -->
     <footer class="site-footer">
-     
+
         <div class="container">
             <div class="row">
                 <div class="col-md-8 col-sm-6 col-xs-12 flex-center">
-                    <p class="copyright-text">Copyright &copy; 2020 All Rights Reserved by 
-                     
+                    <p class="copyright-text">Copyright &copy; 2020 All Rights Reserved by
+
                     </p>
                 </div>
             </div>
