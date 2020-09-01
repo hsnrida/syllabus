@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('phone')->nullable();
             $table->date('joining_date')->nullable();
             $table->string('degrees')->nullable();
-            $table->string('type')->nullable();
+            $table->boolean('approved')->default(0);
             $table->rememberToken();
             $table->timestamps();
 

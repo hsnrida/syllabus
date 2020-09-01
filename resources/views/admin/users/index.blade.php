@@ -19,6 +19,7 @@
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
                 <th scope="col">Email</th>
+                <th scope="col">Approved</th>
                 <th scope="col">Roles</th>
                 <th scope="col">Actions</th>
               </tr>
@@ -29,6 +30,7 @@
                 <th scope="row">{{$user->id}}</th>
                 <td>{{$user->name}}</td>
                 <td> {{$user->email}}</td>
+                <td>@if($user->approved)Yes @else No @endif</td>
                 <td> {{implode(',', $user->roles()->get()->pluck('name')->toArray())}}</td>
                 <td>
 

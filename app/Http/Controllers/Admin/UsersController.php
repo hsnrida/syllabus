@@ -22,15 +22,14 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $user=Auth::user();
-        $department=$user->department;
-        $users=$department->users;
-        return view('admin.users.index')->with('users',$users);
-
+        $user = Auth::user();
+        $department = $user->department;
+        $users = $department->users;
+        return view('admin.users.index')->with('users', $users);
     }
 
- 
- 
+
+
 
     /**
      * Display the specified resource.
@@ -51,10 +50,10 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
-        $roles =Role::all();
+        $roles = Role::all();
         return view('admin.users.edit')->with([
-          'user'=>$user,
-          'roles'=>$roles
+            'user' => $user,
+            'roles' => $roles
         ]);
     }
 
@@ -67,19 +66,23 @@ class UsersController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $user->roles()->sync($request->roles);
-         $user->name=$request->name;
-         $user->email=$request->email;
-        if( $user->save())
-        {
-               $request->session()->flash('success',$user->name .'  has been updated');
-                
+        if($request->approval==1){
+            $user->approved=1;
         }
-        else {
-               $request->session()->flash('error','There was an error updating the user');
+        else{
+            $user->approved=0;
+        }
+        
+        $user->roles()->sync($request->roles);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        if ($user->save()) {
+            $request->session()->flash('success', $user->name . '  has been updated');
+        } else {
+            $request->session()->flash('error', 'There was an error updating the user');
         }
 
-         return redirect()->route('admin.users.index');
+        return redirect()->route('admin.users.index');
     }
 
     /**

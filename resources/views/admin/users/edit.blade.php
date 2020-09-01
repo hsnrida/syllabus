@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+
+ 
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -35,13 +38,23 @@
                                 @enderror
                             </div>
                         </div>
+
+                        <div class="form-group row">
+                            <label for="name" class="col-md-2 col-form-label text-md-right">Approval</label>
+                            <div class="col-md-6">
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" id="approval" name="approval" value=1  @if($user->approved) checked @endif >
+                                    <label class="custom-control-label" for="approval"></label>
+                                </div>
+                            </div>
+                        </div>
                         @csrf
                         {{ method_field('PUT') }}
                         <div class="form-group row">
                             <label for="roles" class="col-md-2 col-form-label text-md-right">Roles</label>
                             <div class="col-md-6">
                                 @foreach($roles as $role)
-                            
+
                                 <div class="form-check">
                                     <input type="checkbox" name="roles[]" value="{{$role->id}}" @if($user->roles->pluck('id')->contains($role->id)) checked @endif >
                                     <label> {{$role->name}} </label>
