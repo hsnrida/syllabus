@@ -1,12 +1,18 @@
 <head>
     <link href="{{ asset('css/navbar.css') }}" rel="stylesheet">
-
+    <link href="{{ asset('css/button2.css') }}" rel="stylesheet">
 </head>
 <nav class="navbar navbar-expand-md topnav" id="topnav">
     <div class="container">
-        <a class="navbar-brand active" href="{{ url('/') }}">
-            Home <span class="caret"></span>
-        </a>
+        <form action="/"  >
+            <button type="submit" class="learn-more " >
+                <span class="circle" aria-hidden="true">
+                    <span class="icon arrow"></span>
+                </span>
+                <span class="button-text text-white">Home</span>
+            </button>
+        </form>
+       
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
             <span class="navbar-toggler-icon"></span>
@@ -65,9 +71,9 @@
                     <small>{{ Auth::user()->name}}</small>
                 </a>
                 <a class="navbar-brand" href="{{ url('/home') }}">
-                {{ Auth::user()->department->name}}
+                    {{ Auth::user()->department->name}}
                 </a>
-               
+
                 <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                     {{ __('Logout') }}

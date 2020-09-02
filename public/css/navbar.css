@@ -1,21 +1,21 @@
 /* Add a black background color to the top navigation */
 .topnav {
-    background-color: #000;
+    background-color:#000080 ;
     box-shadow: 10px 10px 5px grey;
     border-radius: 3px;
-  
-    
+    overflow: hidden;
+
   }
   
   /* Style the links inside the navigation bar */
   .topnav a {
-    color: #f2f2f2;
+    color: lightgrey;
     text-align: center;
     text-decoration: none;
     font-size: 17px;
     border-radius: 10px;
     padding: 10px 14px;
-    background-color: #1b221b;
+    background-color:#E6E6FA66;
     margin-right: 10px;
   }
   
@@ -32,11 +32,11 @@
   
   /* Add a color to the active/current link */
   .topnav a.active {
-    background-color: #4CAF50;
-    color: white;
+    background-color: #00CED1;
+    color: wheat;
   }
   .topnav a.disabled {
-    background-color: rgb(250, 199, 199);
+    background-color: #eeffee;
     color: black;
   }
   @keyframes example {
@@ -46,7 +46,7 @@
       background-color: #ddd;
     }
     to {
-       background-color: #60047c; 
-       color: #f2f2f2;
+       background-color: #FF1493; 
+       color: white;
       }
   }
