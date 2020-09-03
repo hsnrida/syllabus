@@ -105,7 +105,7 @@
     </div>
     @endif
     <div class="col-md-10">
-        <div class="container" style="margin-left: 70px;">
+        <div class="container">
 
             <div class="row justify-content-center">
 
@@ -126,8 +126,10 @@
 
                     @if($currentSyllabus->stage==0)
                     <div class="card">
-                        <div class="card-header " style="background-color: #f0d1bb; text-align: center"><h3>{{$currentSyllabus->title}}</h3></div>
-                        <div class="card-body" style="background-color:#f3f5e9">
+                        <div class="card-header text-center  " style="background-color:#F5F5F5;">
+                            <h1><span class="badge badge-secondary">{{$currentSyllabus->title}}</span></h1>
+                        </div>
+                        <div class="card-body" style="background-color:#F5F5F5">
 
                             <form action="{{route('builder.syllabi.update',$currentSyllabus ) }}" method="POST">
                                 @csrf
@@ -140,7 +142,7 @@
 
 
                         </div>
-                        <div class="card-footer  text-white" style="background-color: #f0d1bb;">
+                        <div class="card-footer  text-white" style="background-color: #F5F5F5;">
                             <div class="row justify-content-center">
                                 <div class="btn-group btn-group-lg" role="group" aria-label="Basic example">
                                     <button type="submit" value="save" name="action" class="btn btn-primary" style="margin:0 auto; display:block;">Save</button>
@@ -152,23 +154,25 @@
                     </div>
                     @elseif($currentSyllabus->stage>0)
                     <div class="card">
-                        <div class="card-header text-white" style="background-color: #232e2d;">{{$currentSyllabus->title}}</div>
+                        <div class="card-header text-center  " style="background-color:#F5F5F5;">
+                            <h1><span class="badge badge-secondary">{{$currentSyllabus->title}}</span></h1>
+                        </div>
                         <div class="card-body">
                             @if($currentSyllabus->stage==2)
-                            <div class="alert alert-secondary" role="alert">
-                                This syllabus is confirmed by validator
+                            <div class="alert alert-secondary text-center" role="alert">
+                               <h3> This syllabus is confirmed by validator</h3>
                             </div>
                             @elseif($currentSyllabus->stage==5)
-                            <div class="alert alert-success" role="alert">
-                                This syllabus is confirmed by supervisor!
+                            <div class="alert alert-success text-center" role="alert">
+                                <h3>This syllabus is confirmed by supervisor!</h3>
                             </div>
                             @elseif($currentSyllabus->stage==10)
-                            <div class="alert alert-success" role="alert">
-                                This syllabus is online
+                            <div class="alert alert-success text-center" role="alert">
+                                <h3>This syllabus is online</h3>
                             </div>
                             @elseif($currentSyllabus->stage==1)
-                            <div class="alert alert-info" role="alert">
-                                Syllabus waiting validation
+                            <div class="alert alert-info text-center" role="alert">
+                                <h3>Syllabus waiting validation</h3>
                             </div>
                             @endif
                             {!! $currentSyllabus->syllabus!!}
@@ -179,7 +183,7 @@
                     <div class="row justify-content-center">
                         <div class="col-md-8">
                             <div class="card">
-                                <div class="card-header text-white" style="background-color: #eb7175;">
+                                <div class="card-header text-white text-center"  style="background-color: #eb7175;">
                                     <h3>{{$currentSyllabus->title}} syllabus</h3>
                                 </div>
                                 <div class="card-body">
@@ -189,7 +193,7 @@
                         </div>
                         <div class="col-md-4 ">
                             <div class="card" style="position: fixed; width:30%">
-                                <div class="card-header text-white" style="background-color: #eb7175;">
+                                <div class="card-header text-white text-center" style="background-color: #eb7175;">
                                     <h3>Validator Comments</h3>
                                 </div>
                                 <div class="card-body">
@@ -202,7 +206,7 @@
                     <div class="row justify-content-center">
                         <div class="col-md-8">
                             <div class="card">
-                                <div class="card-header text-white" style="background-color: #eb7175;">
+                                <div class="card-header text-white text-center" style="background-color: #eb7175;">
                                     <h3> {{$currentSyllabus->title}} syllabus
                                 </div>
                                 <div class="card-body">
@@ -212,7 +216,7 @@
                         </div>
                         <div class="col-md-4 ">
                             <div class="card" style="position: fixed;">
-                                <div class="card-header text-white" style="background-color: #eb7175;">
+                                <div class="card-header text-white text-center" style="background-color: #eb7175;">
                                     <h3>Supervisor Comments</h3>
                                 </div>
                                 <div class="card-body">
@@ -231,23 +235,23 @@
                         ?>
                         <div class="col-md-8">
                             <div class="card">
-                                <div class="card-header  text-white" style="background-color: #b31e1e;">
+                                <div class="card-header  text-white text-center" style="background-color: #b31e1e;">
                                     <h3> {{$rejectedSyllabus->title}} syllabus</h3>
                                 </div>
-                                <div class="card-body">
+                                <div class="card-body ">
                                     {!! $rejectedSyllabus->syllabus!!}
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-4 " style="position: fixed; bottom:50px">
                             <div class="card">
-                                <div class="card-header  text-white" style="background-color: #b31e1e;">
+                                <div class="card-header  text-white text-center" style="background-color: #b31e1e;">
                                     <h5>Attention</h5>
                                 </div>
                                 <div class="card-body">
                                     Your last syllabus was rejected by validator <a href="{{ route('builder.syllabi.show', $rejectedSyllabus->id)}}">check comments!</a>
                                 </div>
-                                <div class="card-footer text-muted">
+                                <div class="card-footer text-muted center text-center">
                                     <a type="button" class="btn btn-success" href="{{ route('builder.syllabi.retry', $currentSyllabus->id)}}">Retry</a>
                                 </div>
                             </div>
@@ -263,23 +267,23 @@
                         ?>
                         <div class="col-md-8">
                             <div class="card">
-                                <div class="card-header text-white" style="background-color: #b31e1e;">
+                                <div class="card-header text-white text-center" style="background-color: #b31e1e;">
                                     <h3> {{$rejectedSyllabus->title}} syllabus</h3>
                                 </div>
-                                <div class="card-body">
+                                <div class="card-body ">
                                     {!! $rejectedSyllabus->syllabus!!}
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-4 " style="position: fixed; bottom:50px">
                             <div class="card">
-                                <div class="card-header text-white" style="background-color: #b31e1e;">
+                                <div class="card-header text-white text-center" style="background-color: #b31e1e;">
                                     <h5>Attention</h5>
                                 </div>
                                 <div class="card-body">
                                     Your last syllabus was rejected by supervior <a href="{{ route('builder.syllabi.show', $rejectedSyllabus->id)}}">check comments!</a>
                                 </div>
-                                <div class="card-footer text-muted">
+                                <div class="card-footer text-muted  text-center">
                                     <a type="button" class="btn btn-success" href="{{ route('builder.syllabi.retry', $currentSyllabus->id)}}">Retry</a>
                                 </div>
                             </div>

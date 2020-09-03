@@ -6,7 +6,7 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="container ml-5">
         @if(count($templates))
         <div class="alert alert-info" role="alert">
             Templates

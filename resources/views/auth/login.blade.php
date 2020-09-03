@@ -1,14 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
+<head>
+<link href="{{ asset('css/login.css') }}" rel="stylesheet">
 
+</head>
 <body style="background-color:lightgray ;">
 
-    <div class="container">
+    <div class="container mt-5" >
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header text-center text-white" style="background-color:steelblue ;"><h3>Login</h3></div>
+                <div class="card "  >
+                    <div class="card-header text-center text-white" style="background-color:#000080 ;"><h3>Login</h3></div>
 
                     <div class="card-body">
                         @if(session()->has('message'))
@@ -51,7 +54,7 @@
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-8 offset-md-4">
-                                    <button type="submit" class="btn btn-primary">
+                                    <button type="submit" class="btn btn-primary"  >
                                         {{ __('Login') }}
                                     </button>
 

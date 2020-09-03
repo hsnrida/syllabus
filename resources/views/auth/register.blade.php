@@ -3,11 +3,11 @@
 @section('content')
 <body  style="background-color:lightgray ;">
     
-<div class="container">
+<div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-            <div class="card-header text-center text-white" style="background-color:steelblue ;"><h3>Register</h3></div>
+            <div class="card-header text-center text-white" style="background-color:#000080 ;"><h3>Register</h3></div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">

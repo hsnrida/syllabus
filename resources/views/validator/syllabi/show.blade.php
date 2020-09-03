@@ -25,22 +25,39 @@
         <div class="col-md-9 ">
             @if($currentValidation->status==0 && $currentValidation->syllabus->stage==1)
             <div class="card">
-                <div class="card-header text-white" style="background-color: #00AA9E;">
-                    <h3>{{ $currentValidation->syllabus->title }} syllabus</h3>
+                <div class="card-header text-center  " style="background-color:#F5F5F5;">
+                    <h1><span class="badge badge-secondary">{{ $currentValidation->syllabus->title }}</span></h1>
                 </div>
                 <div class="card-body">
                     {!! $currentValidation->syllabus->syllabus !!}
                 </div>
-                <div class="btn-group" role="group" aria-label="Basic example">
-                    <a type="button" class="btn btn-success" href="{{ route('validator.syllabi.confirm', $currentValidation->id)}}">Confirm</a>
-                </div><br>
+                <div class="card-footer  text-white" style="background-color: #F5F5F5;">
+                    <div class="row justify-content-center">
+                        <a type="button" class="btn btn-success" href="{{ route('validator.syllabi.confirm', $currentValidation->id)}}">Confirm</a>
+                    </div>
+                </div>
             </div>
             @else
-            <div class="card">
-                <div class="card-header text-white" style="background-color: #eb7175;">
-                    <h3>{{ $currentValidation->syllabus->title }} syllabus</h3>
+            <div class="card ">
+                <div class="card-header text-center  " style="background-color:#F5F5F5;">
+                    <h1><span class="badge badge-secondary">{{ $currentValidation->syllabus->title }}</span></h1>
                 </div>
                 <div class="card-body">
+                    @if($currentValidation->status==1 )
+                    <div class="alert alert-secondary text-center" role="alert">
+                        <h3>Syllabus confirmed</h3>
+                    </div>
+                    @elseif($currentValidation->status==2)
+                    @if($currentValidation->syllabus->stage==10)
+                    <div class="alert alert-success text-center" role="alert">
+                        <h3>Syllabus is online!</h3>
+                    </div>
+                    @else
+                    <div class="alert alert-success text-center" role="alert">
+                        <h3>Syllabus confirmed by supervisor!</h3>
+                    </div>
+                    @endif
+                    @endif
                     {!! $currentValidation->syllabus->syllabus!!}
                 </div>
             </div>
@@ -48,27 +65,23 @@
         </div>
         <div class="col-md-3 ">
             @if($currentValidation->status==0 && $currentValidation->syllabus->stage==1)
-            <div class="card" style="position: fixed; ">
-                <div class="card-header text-white" style="background-color: #00AA9E;">
-                    <h3>Comments</h3>
+            <div class="card" style="position: fixed; background-color:#F5F5F5;">
+                <div class="card-header text-center  " style="background-color:#F5F5F5;">
+                    <h1><span class="badge badge-danger">Comments</span></h1>
                 </div>
-                <div class="card-body">
+                <div class="card-body text-center">
                     <form action="{{ route('validator.syllabi.refuse', $currentValidation->id)}}" method="Post">
                         @csrf
                         <textarea name="comments" id="comments" style="width:100%;" rows="15"></textarea>
-                        <button type="submit" class="btn btn-danger">comment and refuse</button>
+                        <button type="submit" class="btn btn-danger">refuse</button>
                     </form>
                 </div>
             </div>
-            @elseif($currentValidation->status==1 )
-            <div class="alert alert-secondary" style="position: fixed; " role="alert">
-                Syllabus confirmed
-            </div>
             @elseif($currentValidation->status==-1)
-            <div class="card" style="position: fixed;overflow:scroll; height:70%">
+            <div class="card" style="position: fixed; overflow:visible; width:20%">
 
-                <div class="card-header text-white" style="background-color: #eb7175;">
-                    <h3>Comments</h3>
+                <div class="card-header text-white text-center" style="background-color: #eb7175;">
+                    <h3> Comments </h3>
                 </div>
                 <div class="card-body">
                     {{$currentValidation->comments}}
@@ -77,23 +90,13 @@
             @elseif($currentValidation->status==-2)
             <div class="card" style="position: fixed;">
 
-                <div class="card-header text-white" style="background-color: #eb7175;">
+                <div class="card-header text-white text-center" style="background-color: #eb7175;">
                     <h3>Supervisor Comments</h3>
                 </div>
                 <div class="card-body">
                     {{$currentValidation->syllabus->confirmation->comments}}
                 </div>
             </div>
-            @elseif($currentValidation->status==2)
-            @if($currentValidation->syllabus->stage==10)
-            <div class="alert alert-success" style="position: fixed;" role="alert">
-                Syllabus is online!
-            </div>
-            @else
-            <div class="alert alert-success" style="position: fixed;" role="alert">
-                Syllabus confirmed by supervisor!
-            </div>
-            @endif
             @endif
         </div>
         @endif

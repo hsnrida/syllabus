@@ -42,7 +42,6 @@
                                 </a>
 
         </div>
-        <br>
         @endforeach
     </ul>
 </div>

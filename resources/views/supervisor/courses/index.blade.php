@@ -14,7 +14,9 @@
       <div class="card">
 
 
-        <div class="card-header">Courses</div>
+        <div class="card-header text-center  " style="background-color:transparent;">
+          <h1><span class="badge badge-primary">Courses</span></h1>
+        </div>
 
         <div class="card-body">
           <form action="{{route('supervisor.courses.distribute' ) }}" method="POST">
@@ -67,8 +69,8 @@
 
               </tbody>
             </table>
-              <div class="center">
-                <button type="submit" class="btn btn-success btn-lg ">Distribute</button>
+            <div class="center">
+              <button type="submit" class="btn btn-success btn-lg ">Distribute</button>
             </div><br>
           </form>
         </div>

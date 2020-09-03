@@ -25,22 +25,33 @@
             </div>
             @elseif($currentConfirmation->status==0 && $currentConfirmation->syllabus->stage==2)
             <div class="card">
-                <div class="card-header text-white" style="background-color: #00AA9E; text-align: center">
-                    <h3>{{$currentConfirmation->syllabus->title}} syllabus</h3>
+                <div class="card-header text-center  " style="background-color:#F5F5F5;">
+                    <h1><span class="badge badge-secondary">{{ $currentConfirmation->syllabus->title }}</span></h1>
                 </div>
                 <div class="card-body">
                     {!! $currentConfirmation->syllabus->syllabus !!}
                 </div>
-                <div class="btn-group" role="group" aria-label="Basic example">
-                    <a type="button" class="btn btn-success" href="{{ route('supervisor.confirmations.confirm', $currentConfirmation->id)}}">Confirm</a>
-                </div><br>
+                <div class="card-footer  text-white" style="background-color: #F5F5F5;">
+                    <div class="row justify-content-center">
+                        <a type="button" class="btn btn-success" href="{{ route('supervisor.confirmations.confirm', $currentConfirmation->id)}}">Confirm</a>
+                    </div>
+                </div>
             </div>
             @else
             <div class="card">
-                <div class="card-header text-white" style="background-color: #eb7175; text-align: center">
-                    <h3>{{ $currentConfirmation->syllabus->title }} syllabus </h3>
+                <div class="card-header text-center  " style="background-color:#F5F5F5;">
+                    <h1><span class="badge badge-secondary">{{ $currentConfirmation->syllabus->title }}</span></h1>
                 </div>
                 <div class="card-body">
+                    @if($currentConfirmation->syllabus->stage==10)
+                    <div class="alert alert-success text-center" role="alert">
+                        <h3>Syllabus Online</h3>
+                    </div>
+                    @elseif($currentConfirmation->syllabus->stage==5)
+                    <div class="alert alert-secondary text-center" role="alert">
+                        <h3>Syllabus confirmed</h3>
+                    </div>
+                    @endif
                     {!! $currentConfirmation->syllabus->syllabus!!}
                 </div>
             </div>
@@ -50,30 +61,20 @@
             @if($currentConfirmation->status==0 && $currentConfirmation->syllabus->stage==2)
             <div id="CommentCard">
                 <div class="card" style="position: fixed; text-align: center ">
-                    <div class="card-header text-white" style="background-color: #00AA9E;">
-                        <h3>Comments</h3>
+                    <div class="card-header text-center  " style="background-color:#F5F5F5;">
+                        <h1><span class="badge badge-danger">Comments</span></h1>
                     </div>
                     <div class="card-body">
                         <form action="{{ route('supervisor.confirmations.refuse', $currentConfirmation->id)}}" method="Post" class="float-left">
                             @csrf
                             <textarea name="comments" id="comments" cols="40" rows="10"></textarea>
                     </div>
-                    <div class="btn-group" role="group" aria-label="Basic example">
-                        <button type="submit" class="btn btn-danger">comment and refuse</button>
-                    </div><br>
+                        <button type="submit" class="btn btn-danger">refuse</button>
+                        <br>
                     </form>
                 </div>
             </div>
-            @elseif($currentConfirmation->status==1)
-            @if($currentConfirmation->syllabus->stage==10)
-            <div class="alert alert-secondary" role="alert" style="position: fixed;">
-                <h1><span class="badge badge-success">Syllabus online</span></h1>
-            </div>
-            @else
-            <div class="alert alert-secondary" role="alert" style="position: fixed;">
-                <h1><span class="badge badge-success">Syllabus confirmed</span></h1>
-            </div>
-            @endif
+
             @elseif($currentConfirmation->status==-1)
             <div class="card" style="position: fixed;">
 

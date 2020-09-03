@@ -9,8 +9,8 @@
             </div><br><br>
             <div class="card">
 
-                <div class="card-header text-white " style="background-color:slategrey ; text-align:center">
-                    <h4>Confirmed Syllabi</h4>
+                <div class="card-header text-center  " style="background-color:transparent;">
+                    <h1><span class="badge badge-primary">Confirmed Syllabi</span></h1>
                 </div>
 
                 <div class="card-body">
@@ -36,14 +36,16 @@
                                 <td>
                                     <div class="row justify-content-center">
                                         <button type="button" class="btn btn-primary  mr-2" data-toggle="modal" data-target="#id{{$syllabus->id}}">View</button>
-                                        @if($syllabus->stage==5)
-                                        <form action="{{route ('admin.syllabi.edit',$syllabus->id)}}" method="get" class=" ">
+                                        <form action="{{route ('admin.syllabi.update',$syllabus->id)}}" method="post" class=" ">
                                             @csrf
-                                            <button type="submit" class="btn btn-danger">offline</button>
+                                            @method('PUT')
+                                            @if($syllabus->stage==5)
+                                            <button type="submit" name="share" value="online" class="btn btn-danger">Offline</button>
+                                            @else
+                                            <button type="submit" name="share" value="offline" class="btn btn-success">Online</button>
+                                            @endif
                                         </form>
-                                        @else
-                                        <button type="submit" class="disabled btn btn-success">online !</button>
-                                        @endif
+
                                     </div>
                                     <div class="modal fade bd-example-modal-lg" id="id{{$syllabus->id}}" tabindex="-1" role="dialog" aria-labelledby="{{$syllabus->id}}label" aria-hidden="true">
                                         <div class="modal-dialog modal-lg">

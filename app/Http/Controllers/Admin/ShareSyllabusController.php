@@ -22,10 +22,10 @@ class ShareSyllabusController extends Controller
      */
     public function index()
     {
-        $syllabi=$this->getConfirmedSyllabus();
-        return view('admin.syllabi.index')->with('syllabi',$syllabi);
+        $syllabi = $this->getConfirmedSyllabus();
+        return view('admin.syllabi.index')->with('syllabi', $syllabi);
     }
- 
+
     /**
      * Store a newly created resource in storage.
      *
@@ -56,9 +56,6 @@ class ShareSyllabusController extends Controller
      */
     public function edit(Syllabus $syllabus)
     {
-        $syllabus->stage=10;
-        $syllabus->save();
-        return redirect()->back();
     }
 
     /**
@@ -70,19 +67,24 @@ class ShareSyllabusController extends Controller
      */
     public function update(Request $request, Syllabus $syllabus)
     {
-        //
+        if ($request->input('share') == 'online') {
+            $syllabus->stage = 10;
+        } else {
+            $syllabus->stage = 5;
+        }
+        $syllabus->save();
+        return redirect()->back();
     }
 
-    public function getConfirmedSyllabus(){
+    public function getConfirmedSyllabus()
+    {
         $user = Auth::user();
         $currentYear = Carbon::now()->year;
         $confirmedSyllabus = Syllabus::whereYear('created_at', $currentYear)
             ->where('department_id', $user->department_id)
-            ->whereIn('stage',[5,10])
+            ->whereIn('stage', [5, 10])
             ->get();
 
         return $confirmedSyllabus;
     }
-
- 
 }

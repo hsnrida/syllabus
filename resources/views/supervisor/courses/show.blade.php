@@ -5,11 +5,12 @@
   <div class="row justify-content-center">
     <div class="col-md-10">
       <div>
- 
-      </div><br><br> 
-      <div class="card">
 
-        <div class="card-header">Syllabus Distribution</div>
+      </div><br><br>
+      <div class="card">
+        <div class="card-header text-center  " style="background-color:transparent;">
+          <h1><span class="badge badge-primary">Syllabus Distribution</span></h1>
+        </div>
 
         <div class="card-body">
 

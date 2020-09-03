@@ -2,15 +2,18 @@
 
 @section('content')
 
- 
+
 
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-7">
             <div class="card">
-                <div class="card-header">Edit user {{$user->name}}</div>
 
-                <div class="card-body">
+                <div class="card-header text-center  " style="background-color:transparent;">
+                    <h1><span class="badge badge-primary">{{$user->name}}</span></h1>
+                </div>
+
+                <div class="card-body ">
                     <form action="{{route('admin.users.update',$user ) }}" method="POST">
                         <div class="form-group row">
                             <label for="email" class="col-md-2 col-form-label text-md-right">Email</label>
@@ -43,7 +46,7 @@
                             <label for="name" class="col-md-2 col-form-label text-md-right">Approval</label>
                             <div class="col-md-6">
                                 <div class="custom-control custom-switch">
-                                    <input type="checkbox" class="custom-control-input" id="approval" name="approval" value=1  @if($user->approved) checked @endif >
+                                    <input type="checkbox" class="custom-control-input" id="approval" name="approval" value=1 @if($user->approved) checked @endif >
                                     <label class="custom-control-label" for="approval"></label>
                                 </div>
                             </div>
