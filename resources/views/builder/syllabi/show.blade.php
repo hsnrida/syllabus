@@ -160,7 +160,7 @@
                         <div class="card-body">
                             @if($currentSyllabus->stage==2)
                             <div class="alert alert-secondary text-center" role="alert">
-                               <h3> This syllabus is confirmed by validator</h3>
+                                <h3> This syllabus is confirmed by validator</h3>
                             </div>
                             @elseif($currentSyllabus->stage==5)
                             <div class="alert alert-success text-center" role="alert">
@@ -183,8 +183,8 @@
                     <div class="row justify-content-center">
                         <div class="col-md-8">
                             <div class="card">
-                                <div class="card-header text-white text-center"  style="background-color: #eb7175;">
-                                    <h3>{{$currentSyllabus->title}} syllabus</h3>
+                                <div class="card-header text-center  " style="background-color:#F5F5F5;">
+                                    <h1><span class="badge badge-secondary">{{ $currentSyllabus->title }}</span></h1>
                                 </div>
                                 <div class="card-body">
                                     {!! $currentSyllabus->syllabus!!}
@@ -206,8 +206,8 @@
                     <div class="row justify-content-center">
                         <div class="col-md-8">
                             <div class="card">
-                                <div class="card-header text-white text-center" style="background-color: #eb7175;">
-                                    <h3> {{$currentSyllabus->title}} syllabus
+                                <div class="card-header text-center  " style="background-color:#F5F5F5;">
+                                    <h1><span class="badge badge-secondary">{{ $currentSyllabus->title }}</span></h1>
                                 </div>
                                 <div class="card-body">
                                     {!! $currentSyllabus->syllabus!!}
@@ -236,7 +236,7 @@
                         <div class="col-md-8">
                             <div class="card">
                                 <div class="card-header  text-white text-center" style="background-color: #b31e1e;">
-                                    <h3> {{$rejectedSyllabus->title}} syllabus</h3>
+                                    <h3> {{$rejectedSyllabus->title}} </h3>
                                 </div>
                                 <div class="card-body ">
                                     {!! $rejectedSyllabus->syllabus!!}

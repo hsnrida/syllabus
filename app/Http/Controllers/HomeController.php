@@ -56,7 +56,7 @@ class HomeController extends Controller
     {
         $user = Auth::user();
         $department = $user->department;
-        $syllabi = $department->syllabi->where('stage', 10)
+        $syllabi = $department->syllabi->whereIn('stage', [10,5])
             ->groupBy(function ($val) {
                 return Carbon::parse($val->created_at)->format('Y');
             });

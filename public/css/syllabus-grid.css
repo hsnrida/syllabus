@@ -22,18 +22,18 @@
     color: black;
     transform: scale(10,10);
     transform: skewX(2deg);
-    animation-name: example;
+    animation-name: frame;
     animation-duration: 2s;
     animation-fill-mode: both;
     text-decoration: none;
  
 }
 
-@keyframes example {
+@keyframes frame {
    
   
     from { 
-      background-color: #ddd;
+      background-color: #00008033;
     }
     to {
        background-color: #716d72; 

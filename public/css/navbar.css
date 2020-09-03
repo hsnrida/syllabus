@@ -26,7 +26,7 @@
     transform: scale(1.5,1.5);
     transform: skewX(7deg);
     animation-name: example;
-    animation-duration: 4s;
+    animation-duration: 1s;
     animation-fill-mode: both;
   }
   

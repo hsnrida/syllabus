@@ -10,8 +10,8 @@
             </div>
             <div class="card mt-2">
 
-                <div class="card-header text-white" style="background-color: #eb7175; text-align: center">
-                    <h3>{{ $syllabus->title }} syllabus </h3>
+                <div class="card-header text-center  " style="background-color:#F5F5F5;">
+                    <h1><span class="badge badge-primary">{{$syllabus->title}}</span></h1>
                 </div>
                 <div class="card-body">
                     {!! $syllabus->syllabus!!}

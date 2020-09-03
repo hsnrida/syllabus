@@ -13,19 +13,19 @@
 
             <body>
                 @foreach($universities as $university)
-                <div class="dropdown mt-5">
-                    <button class="btn btn-outline-info btn-lg btn-block dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <div class="dropdown mt-3">
+                    <button class="btn btn-primary btn-lg btn-block dropdown-toggle " type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <h3> {{ $university->name}} </h3>
                     </button>
                     <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
-                        <li class="dropdown-item"><a type="button" data-toggle="modal" data-target="#id{{$university->id}}">Information</a></li>
+                         <a  class="dropdown-item" type="button" data-toggle="modal" data-target="#id{{$university->id}}">Information</a>
                         <li class="dropdown-divider"></li>
                         @foreach($university->faculties as $faculty)
                         <li class="dropdown-submenu">
                             <a class="dropdown-item" tabindex="-1" href="#">{{$faculty->name}}</a>
                             <ul class="dropdown-menu">
                                 @foreach($faculty->departments as $department)
-                                <li class="dropdown-item"><a href="{{route('universities.department' , $department->id)}}">{{$department->name}}</a></li>
+                                <a class="dropdown-item" href="{{route('universities.department' , $department->id)}}">{{$department->name}}</a> 
                                 @endforeach
                             </ul>
                         </li>
@@ -40,13 +40,14 @@
                             <div class="modal-header text-center">
                                 <h1 class="modal-title " id="id{{$university->id}}">{{$university->name}}</h1>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body justify-content-center">
                                 <p></p>
                                 @foreach($university->faculties as $faculty)
-                                <h4 class="text-center">{{$faculty->name}}</h4><hr>
+                                <h4 >{{$faculty->name}}<small class="float-right">{{$faculty->description}}</small></h4> <hr>
                                 @endforeach
                             </div>
                             <div class="modal-footer">

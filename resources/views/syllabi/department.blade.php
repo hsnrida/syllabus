@@ -10,9 +10,11 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             @if(!count($syllabi))
-                <div class="alert alert-info text-center" role="alert">
+            <div class="container">
+                <div class="alert alert-primary text-center " role="alert">
                     <h2>No Available Syllabi</h2>
                 </div>
+            </div>
             @else
             <div class="container">
                 <div class="row  row-lg">

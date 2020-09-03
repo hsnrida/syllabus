@@ -14,27 +14,27 @@ class UniversitySeeder extends Seeder
     public function run()
     {
         University::create([
-            'name'=>'LU',
+            'name'=>'Lebanese University',
             'address'=>'alMathaf',
           ]);
           University::create([
-            'name'=>'AUB',
+            'name'=>'American University of Beirut',
             'address'=>'3en el Mrayse ',
           ]);
           University::create([
-            'name'=>'LIU',
+            'name'=>'Lebanese International University',
             'address'=>'Saleem Slem ',
           ]);
           University::create([
-            'name'=>'MU',
+            'name'=>'Al-Maaref University',
             'address'=>'Airport Bridge',
           ]);  
           University::create([
-            'name'=>'LAU',
+            'name'=>'Lebanese American University',
             'address'=>'Beirut',
           ]);  
           University::create([
-            'name'=>'IUL',
+            'name'=>'Islamic University of Lebanon',
             'address'=>'khaldeh',
           ]);  
             
