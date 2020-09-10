@@ -38,13 +38,13 @@ class UserSeeder extends Seeder
       'department_id' => '1',
       'approved' => 1
     ]);
-    // $builder = User::create([
-    //   'name' => 'Builder ',
-    //   'email' => 'builder@builder.com',
-    //   'password' => Hash::make('123456789'),
-    //   'department_id' => '1',
-    //   'approved' => 1
-    // ]);
+    $builder = User::create([
+      'name' => 'Builder ',
+      'email' => 'builder@builder.com',
+      'password' => Hash::make('123456789'),
+      'department_id' => '1',
+      'approved' => 1
+    ]);
     $builderTwo = User::create([
       'name' => 'Builder two',
       'email' => 'buildertwo@builder.com',
@@ -82,7 +82,7 @@ class UserSeeder extends Seeder
     ]);
 
     $admin->roles()->attach($adminRole);
-    // $builder->roles()->attach($builderRole);
+    $builder->roles()->attach($builderRole);
     $validator->roles()->attach($validatorRole);
     $supervisor->roles()->attach($supervisorRole);
     $builder_test->roles()->attach($builderRole);
