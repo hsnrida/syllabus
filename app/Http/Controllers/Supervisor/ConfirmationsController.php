@@ -14,39 +14,20 @@ use Illuminate\Support\Facades\DB;
 
 class ConfirmationsController extends Controller
 {
+    
+    
+    // Confirmation controller for supervisor responsible for all confirmation 
+    
     public function __construct()
     {
         $this->middleware('auth');
         $this->middleware('role:supervisor');
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $confirmations = $this->getLatestVersions();
         return view('supervisor.confirmations.index')->with('confirmations', $confirmations);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
- 
-    public function store(Request $request)
-    {
-        //
-    }
-
- 
     public function show(Confirmation $confirmation)
     {
         $confirmations=$this->getAllConfirmationVersions($confirmation);
@@ -55,8 +36,6 @@ class ConfirmationsController extends Controller
             'confirmations' => $confirmations
         ]);
     }
-
- 
     public function edit(Confirmation $confirmation)
     {
         //
@@ -102,14 +81,9 @@ class ConfirmationsController extends Controller
         return $this->index();
     }
 
- 
-    public function update(Request $request, Confirmation $confirmation)
-    {
-        //
-    }
 
- 
 
+    // eloquent ORM database queries 
 
     // get all courses of the department
     public function getAllCourses()
@@ -118,7 +92,6 @@ class ConfirmationsController extends Controller
         $courseSyllabus = $user->department->courses;
         return $courseSyllabus;
     }
-
     //get all the versions of a specific validation of a user in this year 
     public function getAllConfirmationVersions(Confirmation $confirmation)
     {
@@ -134,7 +107,6 @@ class ConfirmationsController extends Controller
  
         return $confirmations;
     }
-
     //get a group of validations with all its versions
     public function getAllConfirmations()
     {

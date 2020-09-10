@@ -25,35 +25,56 @@ class UserSeeder extends Seeder
 
 
     $admin = User::create([
-      'name' => 'Admin User',
+      'name' => 'Admin ',
       'email' => 'admin@admin.com',
       'password' => Hash::make('123456789'),
       'department_id' => '1',
       'approved' => 1
     ]);
-    $builder = User::create([
-      'name' => 'Builder User',
-      'email' => 'builder@builder.com',
-      'password' => Hash::make('123456789'),
-      'department_id' => '1',
-      'approved' => 1
-    ]);
-    $validator = User::create([
-      'name' => 'Validator User',
-      'email' => 'validator@validator.com',
-      'password' => Hash::make('123456789'),
-      'department_id' => '1',
-      'approved' => 1
-    ]);
     $supervisor = User::create([
-      'name' => 'Supervisor User',
+      'name' => 'Supervisor ',
       'email' => 'supervisor@supervisor.com',
       'password' => Hash::make('123456789'),
       'department_id' => '1',
       'approved' => 1
     ]);
+    // $builder = User::create([
+    //   'name' => 'Builder ',
+    //   'email' => 'builder@builder.com',
+    //   'password' => Hash::make('123456789'),
+    //   'department_id' => '1',
+    //   'approved' => 1
+    // ]);
+    $builderTwo = User::create([
+      'name' => 'Builder two',
+      'email' => 'buildertwo@builder.com',
+      'password' => Hash::make('123456789'),
+      'department_id' => '1',
+      'approved' => 1
+    ]);
+    $builderThree = User::create([
+      'name' => 'Builder three',
+      'email' => 'builderthree@builder.com',
+      'password' => Hash::make('123456789'),
+      'department_id' => '1',
+      'approved' => 1
+    ]);
+    $validator = User::create([
+      'name' => 'Validator ',
+      'email' => 'validator@validator.com',
+      'password' => Hash::make('123456789'),
+      'department_id' => '1',
+      'approved' => 1
+    ]);
+    $validatorTwo = User::create([
+      'name' => 'Validator two ',
+      'email' => 'validatortwo@validator.com',
+      'password' => Hash::make('123456789'),
+      'department_id' => '1',
+      'approved' => 1
+    ]);
     $builder_test = User::create([
-      'name' => 'Builder2 User',
+      'name' => 'Builder2 ',
       'email' => 'builder2@builder2.com',
       'password' => Hash::make('123456789'),
       'department_id' => '4'
@@ -61,10 +82,16 @@ class UserSeeder extends Seeder
     ]);
 
     $admin->roles()->attach($adminRole);
-    $builder->roles()->attach($builderRole);
+    // $builder->roles()->attach($builderRole);
     $validator->roles()->attach($validatorRole);
     $supervisor->roles()->attach($supervisorRole);
     $builder_test->roles()->attach($builderRole);
+
+    $builderTwo->roles()->attach($builderRole);
+    $builderThree->roles()->attach($builderRole);
+    $validatorTwo->roles()->attach($validatorRole);
+
+
 
 
 

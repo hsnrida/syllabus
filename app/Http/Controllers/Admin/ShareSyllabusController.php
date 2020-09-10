@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Auth;
 
 class ShareSyllabusController extends Controller
 {
+    // the controller for admin role its responsible for toggle   
+    // syllabus status -> (online-offline)
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -26,37 +29,7 @@ class ShareSyllabusController extends Controller
         return view('admin.syllabi.index')->with('syllabi', $syllabi);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Syllabus  $syllabus
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Syllabus $syllabus)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Syllabus  $syllabus
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Syllabus $syllabus)
-    {
-    }
 
     /**
      * Update the specified resource in storage.
@@ -76,6 +49,7 @@ class ShareSyllabusController extends Controller
         return redirect()->back();
     }
 
+    
     public function getConfirmedSyllabus()
     {
         $user = Auth::user();

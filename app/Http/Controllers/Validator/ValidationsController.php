@@ -13,11 +13,10 @@ use App\User;
 
 class ValidationsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+
+   // validation controller for validator responsible for all validations issues 
+   
     public function __construct()
     {
         $this->middleware('auth');
@@ -28,18 +27,6 @@ class ValidationsController extends Controller
         $validations=$this->getLatestVersions();
         return view('validator.syllabi.index')->with('validations', $validations);
     }
-
-    public function create()
-    {
-        //
-    }
-
-
-    public function store(Request $request)
-    {
-        //
-    }
-
     public function show(int $validation)
     {
         $validation = Validation::find($validation);
@@ -97,14 +84,6 @@ class ValidationsController extends Controller
     }
 
 
-    public function edit(int $validation)
-    {
-    }
-
-
-  
-
-
     //get all the versions of a specific validation of a user in this year 
     public function getAllValidationVersions(Validation $validation)
     {
@@ -122,7 +101,6 @@ class ValidationsController extends Controller
         }
         return $validations;
     }
-
     //get a group of validations with all its versions
     public function getAllValidations()
     {

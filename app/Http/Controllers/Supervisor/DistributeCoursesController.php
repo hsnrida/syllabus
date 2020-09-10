@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Auth;
 
 class DistributeCoursesController extends Controller
 {
+
+    //distributing courses syllabi among builders and validators
+
     public function __construct()
     {
         $this->middleware('auth');

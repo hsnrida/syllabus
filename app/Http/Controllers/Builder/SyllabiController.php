@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 class SyllabiController extends Controller
 {
 
+    // Builder role controller responsible for builder, viewing and modifing syllabus
 
     public function __construct()
     {
@@ -24,10 +25,6 @@ class SyllabiController extends Controller
         $user = Auth::user();
         $syllabi = $this->getLatestVersions();
         return view('builder.syllabi.index')->with('syllabi', $syllabi);
-    }
-
-    public function edit(Syllabus $syllabus)
-    {
     }
 
     public function retry(Syllabus $syllabus)
@@ -87,7 +84,6 @@ class SyllabiController extends Controller
             ->get();
         return $syllabi;
     }
-
     //get a group of syllabi with all its versions
     public function getAllSyllabi()
     {

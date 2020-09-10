@@ -8,7 +8,15 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Syllabus Builder</title>
+    <title>
+    @guest
+    Syllabi Builder
+    @else
+    {{ Auth::user()->name}}
+    @endguest
+    
+    
+    </title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>

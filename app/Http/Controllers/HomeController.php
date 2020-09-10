@@ -10,6 +10,13 @@ use Illuminate\Support\Facades\App;
 
 class HomeController extends Controller
 {
+
+
+
+    // controller for the home page of auth users , it will show 
+    // all syllabi versions of the department that this user belongs to
+
+
     /**
      * Create a new controller instance.
      *

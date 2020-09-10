@@ -46,7 +46,7 @@
                             <div class="col-md-6">
                                 <select class="form-control" id="department" name="department">
                                     @foreach($departments as $department)
-                                    <option value="{{$department->id}}">{{$department->name}}</option>
+                                    <option value="{{$department->id}}">{{$department->name}} ({{$department->faculty->university->name}})</option>
                                     @endforeach
                                 </select>
                                 @error('department')

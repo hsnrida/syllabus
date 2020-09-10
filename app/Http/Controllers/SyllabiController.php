@@ -11,6 +11,12 @@ use Illuminate\Support\Facades\App;
 
 class SyllabiController extends Controller
 {
+
+
+    // controller for guest users which will let him choose the university, faculty,
+    // and department he want so all syllabi of this year will appear to him
+    // he can view and download any published syllabus.
+
     public function index()
     {
         $universities = $this->getUniversities();

@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller
 {
+    //  this controller is for admin role its responsible for showing, 
+    //  deleting, and editing all users
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -29,20 +32,8 @@ class UsersController extends Controller
     }
 
 
-
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function show(User $user)
-    {
-        //
-    }
-
-    /**
+    
+     /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\User  $user
